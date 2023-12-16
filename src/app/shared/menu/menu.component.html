@@ -6,12 +6,30 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav">
-                <a href="#" class="nav-item nav-link active">Home</a>
-                <a href="#" class="nav-item nav-link">Manage</a>
-                <a href="#" class="nav-item nav-link">Profile</a>
+                
+                <a href="home" class="nav-item nav-link active">Home</a>
+                <a href="resource-management" class="nav-item nav-link active"
+                    *ngIf="authenticationService.isUserLogged()"
+                >Manage</a>
+                <a href="#" class="nav-item nav-link"
+                    *ngIf="authenticationService.isUserLogged()"
+                >Profile</a>
+
             </div>
+
             <div class="navbar-nav ms-auto">
-                <button class="button-31 nav-item nav-link"> Login </button>
+
+                <button class="button-31 nav-item nav-link" 
+                    (click)="onLogin()"
+                    *ngIf="!authenticationService.isUserLogged(); else logout"
+                > Login </button>
+
+                <ng-template #logout>
+                    <button class="button-31 nav-item nav-link"
+                        (click)="onLogout()"
+                    > Logout </button>
+                </ng-template>
+
             </div>
         </div>
     </div>
