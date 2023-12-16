@@ -9,11 +9,14 @@ import { FormsModule } from '@angular/forms';
 import { AuthModule } from './auth/auth.module';
 import { AdminModule } from './admin/admin.module';
 import { CatalogoModule } from './catalogo/catalogo.module';
+import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
+import { VehicleModule } from './vehicle/vehicle.module';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    VehicleFormComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +26,8 @@ import { CatalogoModule } from './catalogo/catalogo.module';
     FormsModule,
     AuthModule,
     AdminModule,
-    CatalogoModule
+    CatalogoModule,
+    VehicleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
