@@ -1,0 +1,21 @@
+<div class="vehicle_details">
+    <h1>{{ vehicleDetails.vehicle.name }}</h1>
+    <table class="table">
+        <thead>
+            <th>Model</th>
+            <th>Year</th>
+            <th>Since</th>
+        </thead>
+        <tbody>
+            <td> {{ vehicleDetails.vehicle.model }}</td>
+            <td> {{ vehicleDetails.vehicle.year }}</td>
+            <td> {{ vehicleDetails.vehicle.created_at | date }}</td>
+        </tbody>
+    </table>
+</div>
+
+<div class="photos_container">
+    <div *ngFor="let photo of vehicleDetails.images.photos">
+        <img [src]="photo" class="img-thumbnail" [alt]="vehicleDetails.vehicle.name">
+    </div>
+</div>

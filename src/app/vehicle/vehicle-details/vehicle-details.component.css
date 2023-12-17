@@ -1,0 +1,22 @@
+.vehicle_details {
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+
+.photos_container {
+    width: 100%;
+    margin: auto;
+    padding: 1rem 1rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
+}
+
+.photos_container img {
+    max-width: 45%;
+    min-width: 350px;
+}

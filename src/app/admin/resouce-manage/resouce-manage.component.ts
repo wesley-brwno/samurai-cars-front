@@ -32,6 +32,10 @@ export class ResouceManageComponent implements OnInit{
     this.router.navigate(['new-vehicle']);
   }
 
+  onSeeMoreClick(cardId: number) {
+    this.router.navigate([`vehicle-details/${cardId}`])
+  }
+
   loadUserData() {
     this.http.get<User>(`${API_URI}/users`).subscribe(
       response => {
@@ -49,7 +53,6 @@ export class ResouceManageComponent implements OnInit{
     this.vehicleService.getVehiclesByUser(user_id).subscribe(
       response => {
         this.vehiclesByUser = response;
-        console.log(this.vehiclesByUser); 
       }
     )
   }

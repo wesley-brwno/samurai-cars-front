@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
 import { FormsModule } from '@angular/forms';
+import { VehicleDetailsComponent } from './vehicle-details/vehicle-details.component';
 
 
 
 @NgModule({
   declarations: [
-    VehicleFormComponent
+    VehicleFormComponent,
+    VehicleDetailsComponent
   ],
   imports: [
     CommonModule,

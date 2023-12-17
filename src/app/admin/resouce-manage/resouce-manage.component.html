@@ -18,7 +18,11 @@
         <td>{{ vehicle.model }}</td>
         <td>{{ vehicle.year }}</td>
         <td>{{ vehicle.created_at | date }}</td>
-        <td>{{ vehicle.id }}</td>
+        <td>
+          <button type="button" class="btn btn-outline-secondary"
+            (click)="onSeeMoreClick(vehicle.id)"
+          >See more</button>
+        </td>
       </tr>
     </tbody>
   </table>
