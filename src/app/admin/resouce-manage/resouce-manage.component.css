@@ -1,0 +1,19 @@
+.table_container {
+    width: 45%;
+    margin: auto;
+    text-align: center;
+}
+
+.btn_container {
+    position: fixed;
+    bottom: 10%;
+    right: 2rem;
+    background-color: white;
+}
+@media  screen and (max-width: 555px) {
+    .table_container {
+        width: 90%;
+        margin: auto;
+    }
+}
+  
