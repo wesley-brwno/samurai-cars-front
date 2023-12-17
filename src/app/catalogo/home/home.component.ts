@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { VehiclePage } from 'src/app/service/data/vehicle-pabeable.intefaces';
+import { VehiclePage } from 'src/app/interface/vehicle-pabeable.intefaces';
 import { VehiclePageableService } from 'src/app/service/data/vehicle-pageable.service';
 
 @Component({

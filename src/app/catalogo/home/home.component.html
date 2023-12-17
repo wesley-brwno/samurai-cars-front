@@ -2,7 +2,7 @@
   <div class="card vehicle-container"
     *ngFor="let content of vehiclePage.content"
   >
-    <img src="{{content.images.photos[1]}}" class="img-thumbnail" alt="{{content.vehicle.name}}" />
+    <img [src]="content.images.photos[1]" class="img-thumbnail" alt="{{content.vehicle.name}}" />
     <div class="card-body">
       <h4>{{content.vehicle.name}}</h4>
       

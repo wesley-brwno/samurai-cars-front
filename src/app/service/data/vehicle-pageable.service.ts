@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
 import { API_URI } from 'src/app/app.constants';
-import { VehiclePage } from './vehicle-pabeable.intefaces';
+import { VehiclePage } from '../../interface/vehicle-pabeable.intefaces';
 import { Router } from '@angular/router';
 
 @Injectable({

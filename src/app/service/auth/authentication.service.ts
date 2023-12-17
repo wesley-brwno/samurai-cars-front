@@ -18,7 +18,7 @@ export class AuthenticationService {
       password: password
     }).pipe(map(
       data => {
-        sessionStorage.setItem('TokenJWT', `Bearer ${data.token}`);
+        sessionStorage.setItem('TokenJWT', data.token);
         sessionStorage.setItem('loggedUser', username);        
       }
     ));
@@ -29,8 +29,8 @@ export class AuthenticationService {
     sessionStorage.removeItem('loggedUser');
   }
 
-  getAuthorizationTokenJWT() {
-    return sessionStorage.getItem('TokenJWT');
+  getAuthorizationTokenJWT():string {
+    return sessionStorage.getItem('TokenJWT') ?? '';
   }
 
   isUserLogged(): boolean {
