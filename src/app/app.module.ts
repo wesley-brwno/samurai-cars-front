@@ -9,15 +9,13 @@ import { FormsModule } from '@angular/forms';
 import { AuthModule } from './auth/auth.module';
 import { AdminModule } from './admin/admin.module';
 import { CatalogoModule } from './catalogo/catalogo.module';
-import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
 import { VehicleModule } from './vehicle/vehicle.module';
 import { AuthIntercepterService } from './service/http/auth-intercepter.service';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    VehicleFormComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +29,7 @@ import { AuthIntercepterService } from './service/http/auth-intercepter.service'
     VehicleModule
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: AuthIntercepterService, multi:true} // to solve CORS problem
+    {provide: HTTP_INTERCEPTORS, useClass: AuthIntercepterService, multi:true} 
   ],
   bootstrap: [AppComponent]
 })

@@ -1,7 +1,9 @@
+
+
 import { Component, OnInit } from '@angular/core';
-import { VehicleFormPostService } from '../service/data/vehicle-form-post.service';
-import { VehiclePostDTO } from '../interface/vehicle.interfaces';
 import { HttpClient } from '@angular/common/http';
+import { VehiclePostDTO } from 'src/app/interface/vehicle.interfaces';
+import { VehicleFormPostService } from 'src/app/service/data/vehicle-form-post.service';
 
 @Component({
   selector: 'app-vehicle-form',
@@ -10,22 +12,20 @@ import { HttpClient } from '@angular/common/http';
 })
 export class VehicleFormComponent implements OnInit {
 
-
-
-
   vehiclePostDTO!: VehiclePostDTO
   togleForm!: boolean;
   photos: any[] = new Array(5);
   vehicleId!: number | undefined;
+  isLoadingContent!: boolean;
 
   constructor(
     private vehiclePostService: VehicleFormPostService,
-    private http: HttpClient
   ) { }
+
   ngOnInit(): void {
     this.togleForm = true;
+    this.isLoadingContent = false;
     this.vehiclePostDTO = new VehiclePostDTOImpl("", "", new Date().getFullYear());
-
   }
 
   onSubmitVehicleForm() {
@@ -33,37 +33,44 @@ export class VehicleFormComponent implements OnInit {
       data => {
         this.vehicleId = data.id;
         this.togleForm = false;
+        this.isLoadingContent = false;
       },
       error => {
         console.log(error);
-
+        this.isLoadingContent = false;
       }
     )
+    this.isLoadingContent = true;
   }
 
-  onSubmitPhotosForm() {
+  onFormPhotosSubmit() {
     const formData = new FormData();
     for (let photo of this.photos) {
-      formData.append('photos', photo);
+      if (photo) {
+        formData.append('photos', photo);
+      }
     }
+    this.onSubmitVehiclePhoto(formData);
+  }
 
+  onSubmitVehiclePhoto(formData:FormData) {
     this.vehiclePostService.postVehiclePhotos(this.vehicleId, formData).subscribe(
-      response => {        
-        console.log(JSON.stringify(response));
+      response => {    
+        this.isLoadingContent = false;                  
       },
       error => {
         console.log(error)
+        this.isLoadingContent = false;                  
       }
     );
+    this.isLoadingContent = true;
   }
-
 
   onInputFileChange(event: any, arrayIndex: number) {
     if (event.target.files && event.target.files[0]) {
-      this.photos[arrayIndex] = event.target.files[arrayIndex];
+      this.photos[arrayIndex] = event.target.files[0];
     }
   }
-
 }
 
 export class VehiclePostDTOImpl implements VehiclePostDTO {
@@ -77,3 +84,4 @@ export class VehiclePostDTOImpl implements VehiclePostDTO {
     this.year = year;
   }
 }
+
