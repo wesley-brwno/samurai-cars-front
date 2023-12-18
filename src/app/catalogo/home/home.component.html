@@ -21,7 +21,9 @@
 
       <div>
         <button class="btn btn-primary" type="button">Share</button>
-        <button class="btn btn-link" type="button">Learn More</button>
+        <button class="btn btn-link" type="button"
+          (click)="onSeeMoreClick(content.vehicle.id)"
+        >See More</button>
       </div>
     </div>
   </div>
@@ -36,7 +38,10 @@
             >Previous</span>
         </li>
         <li class="page-item btn-page" *ngFor="let i of pageNumbers">
-            <span class="page-link" (click)="onSelectPage(i)">{{ i + 1 }}</span>
+            <span class="page-link" 
+              (click)="onSelectPage(i)"
+              [ngClass]="{'disabled': vehiclePage.number  === i}"
+            >{{ i + 1 }}</span>
         </li>
         <li class="page-item btn-page">
             <span class="page-link disabled"

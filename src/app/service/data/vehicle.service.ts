@@ -14,6 +14,10 @@ export class VehicleService {
   ) { }
 
 
+  deleteVehicleById(vehicleId: number) {
+    return this.http.delete<any>(`${API_URI}/vehicles?vehicle_id=${vehicleId}`);
+  }
+
   getVehiclesByUser(user_id: number) {
     return this.http.get<VehicleByUser>(`${API_URI}/vehicles?user_id=${user_id}`);
   }

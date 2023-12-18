@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { VehiclePage } from 'src/app/interface/vehicle-pabeable.intefaces';
 import { VehiclePageableService } from 'src/app/service/data/vehicle-pageable.service';
 
@@ -13,11 +14,12 @@ export class HomeComponent implements OnInit{
   pageNumbers: number[] = []
 
   constructor(
-    public vehiclePageableService: VehiclePageableService
+    public vehiclePageableService: VehiclePageableService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.vehiclePageableService.getVehiclesPageable("?size=5&page=0").subscribe(
+    this.vehiclePageableService.getVehiclesPageable("?size=6&page=0").subscribe(
       data => {
         this.vehiclePage = data;
         this.loadPageNumbersArray();    
@@ -29,15 +31,19 @@ export class HomeComponent implements OnInit{
   }
 
   onNextPage() {
-    this.executeVehiclePageableRequest(`?size=5&page=${this.vehiclePage.number + 1}`);
+    this.executeVehiclePageableRequest(`?size=6&page=${this.vehiclePage.number + 1}`);
   }
 
   onPreviousPage() {
-    this.executeVehiclePageableRequest(`?size=5&page=${this.vehiclePage.number - 1}`);
+    this.executeVehiclePageableRequest(`?size=6&page=${this.vehiclePage.number - 1}`);
   }
 
   onSelectPage(pageNumber: number) {
-    this.executeVehiclePageableRequest(`?size=5&page=${pageNumber}`);
+    this.executeVehiclePageableRequest(`?size=6&page=${pageNumber}`);
+  }
+
+  onSeeMoreClick(vehicleId: number) {
+    this.router.navigate([`vehicle-details/${vehicleId}`])
   }
 
   executeVehiclePageableRequest(pageable:string) {

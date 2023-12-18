@@ -41,6 +41,8 @@ export class ResouceManageComponent implements OnInit{
       response => {
         this.loggedUser = response;        
         this.loadUserVehiclesData(this.loggedUser.user_id);
+        sessionStorage.setItem('loggedUserId', this.loggedUser.user_id.toString());
+        sessionStorage.setItem('loggedUserRole', this.loggedUser.authorities.toString());
       },
       error => {
         console.log(error);
