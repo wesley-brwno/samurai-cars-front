@@ -1,55 +1,101 @@
-<section class="vehicle_section">
-    <div class="details">
-        <div class="vehicle_details card">
-            <h1>{{ vehicleDetails.vehicle.name }}</h1>
-            <table class="table">
-                <thead>
-                    <th>Model</th>
-                    <th>Year</th>
-                    <th>Published</th>
-                </thead>
-                <tbody>
-                    <td> {{ vehicleDetails.vehicle.model }}</td>
-                    <td> {{ vehicleDetails.vehicle.year }}</td>
-                    <td> {{ vehicleDetails.vehicle.created_at | date }}</td>
-                </tbody>
-            </table>
-        </div>
-        <div class="card user_details">
-            <h2>Seller {{ userPublicDetails.name }}</h2>
-            <span>Here since - {{ userPublicDetails.created_at | date }}</span><br>
-            <button><a href="#">More by {{ userPublicDetails.name }}</a></button>
-        </div>
+<section class="vehicle_section" *ngIf="!showVehiclesByUserSection; else vehicles_by_user">
+  <div class="details">
+    <div class="vehicle_details card">
+      <h2>{{ vehicleDetails.vehicle.name }}</h2>
+      <table class="table table-bordered ">
+        <thead>
+          <th>Model</th>
+          <th>Year</th>
+          <th>Published</th>
+        </thead>
+        <tbody>
+          <td>{{ vehicleDetails.vehicle.model }}</td>
+          <td>{{ vehicleDetails.vehicle.year }}</td>
+          <td>{{ vehicleDetails.vehicle.created_at | date }}</td>
+        </tbody>
+      </table>
     </div>
-
-    <hr>
-    
-    <div class="photos_container" >
-        <div *ngFor="let photo of vehicleDetails.images.photos">
-            <img [src]="photo" class="img-thumbnail" [alt]="vehicleDetails.vehicle.name">
-        </div>
+    <div class="card user_details">
+      <h2>Seller {{ userPublicDetails.name }}</h2>
+      <span>Here since - {{ userPublicDetails.created_at | date }}</span
+      ><br />
+      <button class="btn btn-outline-secondary" (click)="onMoreBySellerClick(userPublicDetails.id)">
+        More by {{ userPublicDetails.name }}
+      </button>
     </div>
-    
+  </div>
 
-    <div class="butttons_container" *ngIf="isLoggedUserAdmin() || isLoggedUserOwnerOfResource()">
-        <div class="btn_container btn_delete">
-            <button type="button" class="btn btn-outline-primary" (click)="onDeleteClick(vehicleDetails.vehicle.id)">
-              Delete
-            </button>
-        </div>
-    
-        <div class="btn_container btn_edit">
-            <button type="button" class="btn btn-outline-primary" (click)="null">
-              Edit
-            </button>
-        </div>
+  <hr />
 
-        <div class="btn_container btn_home">
-            <button type="button" class="btn btn-outline-primary" (click)="null">
-                <img width="30" height="30" src="https://img.icons8.com/hieroglyphs/30/experimental-home-hieroglyphs.png" alt="experimental-home-hieroglyphs"/>
-            </button>
-        </div>
-
+  <div class="photos_container">
+    <div *ngFor="let photo of vehicleDetails.images.photos">
+      <img
+        [src]="photo"
+        class="img-thumbnail"
+        [alt]="vehicleDetails.vehicle.name"
+      />
     </div>
+  </div>
 
 </section>
+
+<div class="butttons_container">
+    <div
+      class="btn_container btn_delete"
+      *ngIf="isLoggedUserAdmin() || isLoggedUserOwnerOfResource()"
+    >
+      <button
+        type="button"
+        class="btn btn-outline-primary"
+        (click)="onDeleteClick(vehicleDetails.vehicle.id)"
+      >
+        Delete
+      </button>
+    </div>
+
+    <div
+      class="btn_container btn_edit"
+      *ngIf="isLoggedUserAdmin() || isLoggedUserOwnerOfResource()"
+    >
+      <button type="button" class="btn btn-outline-primary" (click)="(null)">
+        Edit
+      </button>
+    </div>
+
+    <div class="btn_container btn_chat" *ngIf="!isLoggedUserOwnerOfResource()">
+      <button
+        type="button"
+        class="btn btn-outline-primary"
+        (click)="onHomeClick()"
+      >
+        <img
+          width="23"
+          height="23"
+          src="https://img.icons8.com/pulsar-line/23/filled-chat.png"
+          alt="filled-chat"
+        />
+      </button>
+    </div>
+
+    <div class="btn_container btn_home">
+      <button
+        type="button"
+        class="btn btn-outline-primary"
+        (click)="onHomeClick()"
+      >
+        <img
+          width="23"
+          height="23"
+          src="https://img.icons8.com/hieroglyphs/24/experimental-home-hieroglyphs.png"
+          alt="experimental-home-hieroglyphs"
+        />
+      </button>
+    </div>
+  </div>
+
+<ng-template #vehicles_by_user>
+  <app-vehicles-by-user
+    (selectVehicleId)="onVehicleIdChange($event)"
+    [vehiclesByUser]="vehiclesByUser">
+  </app-vehicles-by-user>
+</ng-template>

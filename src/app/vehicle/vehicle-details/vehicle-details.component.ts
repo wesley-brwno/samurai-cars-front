@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { API_URI } from 'src/app/app.constants';
 import { Vehicle } from 'src/app/interface/vehicle.interfaces';
 import { AuthenticationService } from 'src/app/service/auth/authentication.service';
 import { VehicleService } from 'src/app/service/data/vehicle.service';
+import { VehiclesByUser } from '../vehicles-by-user/vehicles-by-user.component';
 
 @Component({
   selector: 'app-vehicle-details',
@@ -13,26 +14,22 @@ import { VehicleService } from 'src/app/service/data/vehicle.service';
 })
 export class VehicleDetailsComponent implements OnInit {
   vehicleDetails!: VehicleDetails;
+  vehiclesByUser!: VehiclesByUser;
   userPublicDetails!: UserPublicDetails;
   loggedUserId!: string | null;
   loggedUserRole!: string | null;
-  id!: number;
+  showVehiclesByUserSection!: boolean;
 
   constructor(
     private vehicleService: VehicleService,
     private route: ActivatedRoute,
     private http: HttpClient,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.params['id'];    
-    this.vehicleService.getVehicleById(this.id).subscribe(
-      response => {
-        this.vehicleDetails = response;
-        this.laodUserPublicDetails(this.vehicleDetails.vehicle.user_id);                
-      }
-    );
+    this.loadVehicleByIdData(this.route.snapshot.params['id']);
 
     if(this.isUserLogged()) {
       this.loggedUserId = sessionStorage.getItem('loggedUserId');
@@ -47,7 +44,6 @@ export class VehicleDetailsComponent implements OnInit {
       this.vehicleService.deleteVehicleById(vehicleId).subscribe(
         reponse => {
           console.log("Delete succeeded");
-          
           console.log(reponse);    
         },
         error => {
@@ -59,13 +55,50 @@ export class VehicleDetailsComponent implements OnInit {
     }
   }
 
+  onHomeClick() {
+    this.router.navigate(['home']);
+  }
+
+  onMoreBySellerClick(userId: number) {
+    this.loadVehiclesBySeller(userId);
+    this.showVehiclesByUserSection = true;
+  }
+
+
+  onVehicleIdChange(vehicleId: any) {
+    console.log("VehicleCahnge " + vehicleId);
+    
+    this.loadVehicleByIdData(vehicleId);
+    this.showVehiclesByUserSection = false;
+
+  }
+
+  loadVehicleByIdData(id: number) {    
+    this.vehicleService.getVehicleById(id).subscribe(
+      response => {
+        this.vehicleDetails = response;
+        this.laodUserPublicDetails(this.vehicleDetails.vehicle.user_id);                
+      }
+    );
+  }
 
   laodUserPublicDetails(userId: number) {
     this.http.get<UserPublicDetails>(`${API_URI}/users/${userId}`).subscribe(
       response => {
         this.userPublicDetails = response;        
       }
-    )
+    );
+  }
+
+  loadVehiclesBySeller(userId: number) {
+    this.vehicleService.getVehiclesByUser(userId).subscribe(
+      response => {
+        this.vehiclesByUser = response;
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   isUserLogged() {

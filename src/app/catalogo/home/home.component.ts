@@ -19,7 +19,8 @@ export class HomeComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    this.vehiclePageableService.getVehiclesPageable("?size=6&page=0").subscribe(
+    let page = (sessionStorage.getItem('currentPage') ?? '0');
+    this.vehiclePageableService.getVehiclesPageable(`?size=6&page=${page}`).subscribe(
       data => {
         this.vehiclePage = data;
         this.loadPageNumbersArray();    
@@ -28,6 +29,7 @@ export class HomeComponent implements OnInit{
         console.log(error);
       }
     );
+    sessionStorage.removeItem('currentPage');
   }
 
   onNextPage() {
@@ -43,7 +45,8 @@ export class HomeComponent implements OnInit{
   }
 
   onSeeMoreClick(vehicleId: number) {
-    this.router.navigate([`vehicle-details/${vehicleId}`])
+    this.router.navigate([`vehicle-details/${vehicleId}`]);
+    sessionStorage.setItem('currentPage', this.vehiclePage.number.toString());
   }
 
   executeVehiclePageableRequest(pageable:string) {

@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
 import { FormsModule } from '@angular/forms';
 import { VehicleDetailsComponent } from './vehicle-details/vehicle-details.component';
+import { VehiclesByUserComponent } from './vehicles-by-user/vehicles-by-user.component';
 
 
 
 @NgModule({
   declarations: [
     VehicleFormComponent,
-    VehicleDetailsComponent
+    VehicleDetailsComponent,
+    VehiclesByUserComponent
   ],
   imports: [
     CommonModule,

@@ -72,7 +72,7 @@ export class UserImpl implements User {
   }
 }
 
-export class VehicleByUserImpl implements VehicleByUserImpl {
+export class VehicleByUserImpl {
   user_id: number;
   name: string;
   vehicles: Vehicle[];
