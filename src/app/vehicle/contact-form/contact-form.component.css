@@ -1,0 +1,88 @@
+.form_container {
+    width: 60%;
+    padding: 5%;
+    margin: auto;
+}
+
+.form_container form {
+    padding: 1rem;
+    text-align: left;
+    background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+
+.form_container h2 {
+    text-align: center;
+}
+
+.form_container button {
+    display: block;
+    margin: auto;
+}
+
+.selectedVehicle {
+    display: flex;
+    flex-wrap: wrap;
+    height: fit-content;
+    justify-content: center;
+}
+
+.selectedVehicle img {
+    height: 131px;
+    width: fit-content;
+}
+
+.buttons_container {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 1rem;
+}
+
+.buttons_container button {
+    flex: 1;
+}
+
+.btn_return {
+    position: fixed;
+    bottom: 5%;
+    right: 1.5rem;
+}
+
+@media screen and (max-width: 800px) {
+    .form_container {
+        width: 70%;
+        padding: 1rem;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .form_container {
+        width: 90%;
+        padding: 1rem;
+    }
+    .btn_return {
+        display: none !important;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .form_container {
+        width: 95%;
+        padding: 5px;
+    }
+    .selectedVehicle {
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .selectedVehicle div {
+        width: fit-content;
+        max-width: 70vw;
+    }
+    .buttons_container {
+        flex-wrap: wrap;
+    }
+    .buttons_container button {
+        flex: content;
+    }
+}

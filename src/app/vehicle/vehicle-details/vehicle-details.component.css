@@ -138,5 +138,28 @@
         width: 100vw;
         right: 0;
     }
+}
 
+@media screen and (max-width: 400px) {
+    .vehicle_section {
+        padding: .5rem;
+        padding-bottom: 2.4rem;
+    }
+    .photos_container div img {
+        height: auto;
+        width: 100vw;
+    }
+    .details {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column-reverse;
+    }
+    .vehicle_details {
+        width: fit-content;
+        margin: auto;
+    }
+    .user_details {
+        width: fit-content;
+        margin: auto;
+    }
 }

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { API_URI } from 'src/app/app.constants';
-import { Vehicle } from 'src/app/interface/vehicle.interfaces';
+import { Vehicle } from 'src/app/interface/vehicle-pabeable.intefaces';
 import { AuthenticationService } from 'src/app/service/auth/authentication.service';
 import { VehicleService } from 'src/app/service/data/vehicle.service';
 
@@ -12,12 +12,14 @@ import { VehicleService } from 'src/app/service/data/vehicle.service';
   styleUrls: ['./vehicle-details.component.css']
 })
 export class VehicleDetailsComponent implements OnInit {
+
   vehicleDetails!: VehicleDetails;
   userPublicDetails!: UserPublicDetails;
   loggedUserId!: string | null;
   loggedUserRole!: string | null;
   showVehiclesByUserSection!: boolean;
   showEditForm!: boolean;
+  showContactForm: boolean = false;
 
   constructor(
     private vehicleService: VehicleService,
@@ -36,6 +38,9 @@ export class VehicleDetailsComponent implements OnInit {
     }
   }
 
+  onContactClick() {
+    this.showContactForm = true;
+  }
   onDeleteClick(vehicleId: number) {
     let confirm = window.confirm("Are you sure?")
 

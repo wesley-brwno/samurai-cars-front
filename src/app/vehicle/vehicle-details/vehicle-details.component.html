@@ -1,4 +1,4 @@
-<section [hidden]="showEditForm" class="vehicle_section" *ngIf="!showVehiclesByUserSection; else vehicles_by_user">
+<section [hidden]="showEditForm || showContactForm" class="vehicle_section" *ngIf="!showVehiclesByUserSection; else vehicles_by_user">
   <div class="details">
     <div class="vehicle_details card">
       <h2>{{ vehicleDetails.vehicle.name }}</h2>
@@ -31,10 +31,20 @@
       <img [src]="photo" class="img-thumbnail" [alt]="vehicleDetails.vehicle.name" />
     </div>
   </div>
-
 </section>
 
-<div class="butttons_container">
+<section class="form_section"
+  *ngIf="showContactForm"
+>
+  <app-contact-form
+    [selectedVehicle]="vehicleDetails.vehicle"
+    [vehiclePhotos]="vehicleDetails.images"
+    (closeForm)="showContactForm = false"
+  > 
+  </app-contact-form>
+</section>
+
+<div class="butttons_container" [hidden]="showContactForm">
   <div class="btn_container btn_delete" *ngIf="isLoggedUserAdmin() || isLoggedUserOwnerOfResource()">
     <button type="button" class="btn btn-outline-primary" (click)="onDeleteClick(vehicleDetails.vehicle.id)">
       Delete
@@ -48,7 +58,7 @@
   </div>
 
   <div class="btn_container btn_chat" *ngIf="!isLoggedUserOwnerOfResource()">
-    <button type="button" class="btn btn-outline-primary" (click)="onHomeClick()">
+    <button type="button" class="btn btn-outline-primary" (click)="onContactClick()">
       <img width="23" height="23" src="https://img.icons8.com/pulsar-line/23/filled-chat.png" alt="filled-chat" />
     </button>
   </div>
@@ -58,6 +68,7 @@
       <img width="23" height="23" src="https://img.icons8.com/hieroglyphs/24/experimental-home-hieroglyphs.png" alt="experimental-home-hieroglyphs" />
     </button>
   </div>
+
 </div>
 
 <ng-template #vehicles_by_user>
@@ -69,3 +80,10 @@
 
 <app-vehicle-form *ngIf="showEditForm" (isFormVisible)="onCloseForm($event)" [editVehicle]="vehicleDetails">
 </app-vehicle-form>
+
+<!-- <app-contact-form
+  *ngIf="toggleSection"
+  [selectedVehicle]="selectedVehicle.vehicle"
+  [vehiclePhotos]="selectedVehicle.images"
+  (closeForm)="toggleSection = false"
+></app-contact-form> -->

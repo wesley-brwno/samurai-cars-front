@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { VehiclePage } from 'src/app/interface/vehicle-pabeable.intefaces';
+import { Content, Vehicle, VehiclePage } from 'src/app/interface/vehicle-pabeable.intefaces';
 import { VehiclePageableService } from 'src/app/service/data/vehicle-pageable.service';
 
 @Component({
@@ -11,7 +11,10 @@ import { VehiclePageableService } from 'src/app/service/data/vehicle-pageable.se
 export class HomeComponent implements OnInit{
 
   vehiclePage!: VehiclePage;
-  pageNumbers: number[] = []
+  pageNumbers: number[] = [];
+  toggleSection: boolean = false;
+  loggedUserId!: number;
+  selectedVehicle!: Content;
 
   constructor(
     public vehiclePageableService: VehiclePageableService,
@@ -30,6 +33,7 @@ export class HomeComponent implements OnInit{
       }
     );
     sessionStorage.removeItem('currentPage');
+    this.loggedUserId = parseInt((sessionStorage.getItem('loggedUserId') ?? '-1'));
   }
 
   onNextPage() {
@@ -49,6 +53,11 @@ export class HomeComponent implements OnInit{
     sessionStorage.setItem('currentPage', this.vehiclePage.number.toString());
   }
 
+  onShowContactForm(content: Content) {
+    this.selectedVehicle = content;
+    this.toggleSection = true;
+  }
+
   executeVehiclePageableRequest(pageable:string) {
     this.vehiclePageableService.getVehiclesPageable(`${pageable}`).subscribe(
       data => {
@@ -60,7 +69,6 @@ export class HomeComponent implements OnInit{
     );
   }
     
-
   loadPageNumbersArray() {
     for (let i = 0; i < this.vehiclePage.totalPages; i++) {
       this.pageNumbers.push(i);

@@ -1,7 +1,7 @@
 .catalogo {
     background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
     height: fit-content;
-    min-height: 90vh;
+    min-height: 100vh;
 }
 .cards-container {
     display: flex;
@@ -16,7 +16,7 @@
     text-align: center;
 }
 
-.vehicle-container img {
+.vehicle-container .img-thumbnail {
     height: 150px;
     margin: auto;
     object-fit: contain;
@@ -34,3 +34,9 @@
 .btn-page span:hover {
     background-color: 	#72e6bf;
 }
+
+.btn-contact {
+    text-align: center;
+    background-color: #34C308;
+}
+
