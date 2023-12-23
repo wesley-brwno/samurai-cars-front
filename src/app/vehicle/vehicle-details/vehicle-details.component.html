@@ -72,7 +72,7 @@
 </div>
 
 <ng-template #vehicles_by_user>
-  <app-vehicles-by-user [hidden]="showEditForm" 
+  <app-vehicles-by-user [hidden]="showEditForm || showContactForm" 
     (selectVehicleId)="onVehicleIdChange($event)" 
     [userId]="vehicleDetails.vehicle.user_id">
   </app-vehicles-by-user>
@@ -81,9 +81,3 @@
 <app-vehicle-form *ngIf="showEditForm" (isFormVisible)="onCloseForm($event)" [editVehicle]="vehicleDetails">
 </app-vehicle-form>
 
-<!-- <app-contact-form
-  *ngIf="toggleSection"
-  [selectedVehicle]="selectedVehicle.vehicle"
-  [vehiclePhotos]="selectedVehicle.images"
-  (closeForm)="toggleSection = false"
-></app-contact-form> -->

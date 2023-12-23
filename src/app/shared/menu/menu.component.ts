@@ -21,5 +21,7 @@ export class MenuComponent {
   onLogout() {
     this.authenticationService.logout();
     this.router.navigate(['login']);
+    sessionStorage.removeItem('loggedUserId');
+    sessionStorage.removeItem('loggedUserRole');
   }
 }
