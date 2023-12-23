@@ -54,7 +54,7 @@ export class ResouceManageComponent implements OnInit{
   loadUserVehiclesData(user_id: number) {
     this.vehicleService.getVehiclesByUser(user_id).subscribe(
       response => {
-        this.vehiclesByUser = response;
+        // this.vehiclesByUser = response;
       }
     )
   }

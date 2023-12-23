@@ -5,9 +5,11 @@ import { ResouceManageComponent } from './admin/resouce-manage/resouce-manage.co
 import { HomeComponent } from './catalogo/home/home.component';
 import { VehicleFormComponent } from './vehicle/vehicle-form/vehicle-form.component';
 import { VehicleDetailsComponent } from './vehicle/vehicle-details/vehicle-details.component';
+import { ProfileComponent } from './user/profile/profile.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
+  {path: 'profile', component: ProfileComponent},
   {path: 'resource-management', component: ResouceManageComponent},
   {path: 'home', component: HomeComponent},
   {path: 'new-vehicle', component: VehicleFormComponent},

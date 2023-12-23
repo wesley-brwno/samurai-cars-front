@@ -1,18 +1,18 @@
-<section class="vehicles_by_user">
-  <h2>Vehicles by {{ vehiclesByUser.name }}</h2>
+<section class="vehicles_by_user" *ngIf="vehiclesByUser">
+  <h2>Vehicles by </h2>
   <div class="cards_container">
     <div class="card vehicle_card"
-      *ngFor="let vehicle of vehiclesByUser.vehicles"
-      [ngClass]="{'vehicle_selected' : vehicle.id == currentVehicleId}"
-      (click)="onSelectVehicleClick(vehicle.id)"
+      *ngFor="let content of vehiclesByUser"
+      [ngClass]="{'vehicle_selected' : content.vehicle.id == currentVehicleId}"
+      (click)="onSelectVehicleClick(content.vehicle.id)"
     >
       <img
-        src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Volkswagen_Quantum.jpg/250px-Volkswagen_Quantum.jpg"
+        [src]="content.images.photos[0]"
         class="img-thumbnail"
-        alt="..."
+        [alt]="content.vehicle.name"
       />
       
-      <h3>{{ vehicle.name }}</h3>
+      <h3>{{ content.vehicle.name }}</h3>
       <table>
         <thead>
           <tr>
@@ -22,8 +22,8 @@
         </thead>
         <tbody>
           <tr>
-            <td>{{ vehicle.model }}</td>
-            <td>{{ vehicle.year }}</td>
+            <td>{{ content.vehicle.model }}</td>
+            <td>{{ content.vehicle.year }}</td>
           </tr>
         </tbody>
       </table>

@@ -1,4 +1,4 @@
-export interface VehiclePostDTO {
+export interface VehicleRequestBody {
     id?: number
     name: string,
     model: string,
@@ -6,16 +6,21 @@ export interface VehiclePostDTO {
 }
 
 export interface VehicleByUser {
-    user_id: number;
-    name: string;
-    vehicles: Vehicle[];
+    // user_id: number;
+    // name: string;
+    vehicle: Vehicle;
+    images: Images;
 }
 
 export interface Vehicle {
-    created_at: string;
+    created_at: Date;
     user_id: number;
     id: number;
     name: string;
     model: string;
     year: number;
+}
+
+export interface Images {
+    photos: string[];
 }

@@ -1,3 +1,8 @@
+.catalogo {
+    background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
+    height: fit-content;
+    min-height: 90vh;
+}
 .cards-container {
     display: flex;
     gap: 1rem;

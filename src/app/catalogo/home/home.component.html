@@ -1,53 +1,55 @@
-<div class="cards-container">
-  <div class="card vehicle-container"
-    *ngFor="let content of vehiclePage.content"
-  >
-    <img [src]="content.images.photos[0]" class="img-thumbnail" alt="{{content.vehicle.name}}" />
-    <div class="card-body">
-      <h4>{{content.vehicle.name}}</h4>
-      
-      <table class="table table-bordered">
-        <thead>
-            <th>Model</th>
-            <th>Year</th>
-            <th>Since</th>
-        </thead>
-        <tbody>
-            <td> {{content.vehicle.model}}</td>
-            <td> {{content.vehicle.year}}</td>
-            <td> {{content.vehicle.created_at | date}}</td>
-        </tbody>
-      </table>
-
-      <div>
-        <button class="btn btn-primary" type="button">Share</button>
-        <button class="btn btn-link" type="button"
-          (click)="onSeeMoreClick(content.vehicle.id)"
-        >See More</button>
+<section class="catalogo">
+  <div class="cards-container">
+    <div class="card vehicle-container"
+      *ngFor="let content of vehiclePage.content"
+    >
+      <img [src]="content.images.photos[0]" class="img-thumbnail" alt="{{content.vehicle.name}}" />
+      <div class="card-body">
+        <h4>{{content.vehicle.name}}</h4>
+        
+        <table class="table table-bordered">
+          <thead>
+              <th>Model</th>
+              <th>Year</th>
+              <th>Since</th>
+          </thead>
+          <tbody>
+              <td> {{content.vehicle.model}}</td>
+              <td> {{content.vehicle.year}}</td>
+              <td> {{content.vehicle.created_at | date}}</td>
+          </tbody>
+        </table>
+  
+        <div>
+          <button class="btn btn-primary" type="button">Share</button>
+          <button class="btn btn-link" type="button"
+            (click)="onSeeMoreClick(content.vehicle.id)"
+          >See More</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
-<div class="paginataion-container">
-    <ul class="pagination">
-        <li class="page-item btn-page">
-            <span class="page-link disabled"
-                [ngClass]="{'disabled': vehiclePage.number === 0}"
-                (click)="onPreviousPage()"
-            >Previous</span>
-        </li>
-        <li class="page-item btn-page" *ngFor="let i of pageNumbers">
-            <span class="page-link" 
-              (click)="onSelectPage(i)"
-              [ngClass]="{'disabled': vehiclePage.number  === i}"
-            >{{ i + 1 }}</span>
-        </li>
-        <li class="page-item btn-page">
-            <span class="page-link disabled"
-                [ngClass]="{'disabled': vehiclePage.number + 1 === vehiclePage.totalPages}"
-                (click)="onNextPage()"
-            >Next</span>
-        </li>
-      </ul>
-</div>
+  
+  <div class="paginataion-container">
+      <ul class="pagination">
+          <li class="page-item btn-page">
+              <span class="page-link disabled"
+                  [ngClass]="{'disabled': vehiclePage.number === 0}"
+                  (click)="onPreviousPage()"
+              >Previous</span>
+          </li>
+          <li class="page-item btn-page" *ngFor="let i of pageNumbers">
+              <span class="page-link" 
+                (click)="onSelectPage(i)"
+                [ngClass]="{'disabled': vehiclePage.number  === i}"
+              >{{ i + 1 }}</span>
+          </li>
+          <li class="page-item btn-page">
+              <span class="page-link disabled"
+                  [ngClass]="{'disabled': vehiclePage.number + 1 === vehiclePage.totalPages}"
+                  (click)="onNextPage()"
+              >Next</span>
+          </li>
+        </ul>
+  </div>  
+</section>

@@ -1,11 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { API_URI } from 'src/app/app.constants';
 import { Vehicle } from 'src/app/interface/vehicle.interfaces';
 import { AuthenticationService } from 'src/app/service/auth/authentication.service';
 import { VehicleService } from 'src/app/service/data/vehicle.service';
-import { VehiclesByUser } from '../vehicles-by-user/vehicles-by-user.component';
 
 @Component({
   selector: 'app-vehicle-details',
@@ -14,11 +13,11 @@ import { VehiclesByUser } from '../vehicles-by-user/vehicles-by-user.component';
 })
 export class VehicleDetailsComponent implements OnInit {
   vehicleDetails!: VehicleDetails;
-  vehiclesByUser!: VehiclesByUser;
   userPublicDetails!: UserPublicDetails;
   loggedUserId!: string | null;
   loggedUserRole!: string | null;
   showVehiclesByUserSection!: boolean;
+  showEditForm!: boolean;
 
   constructor(
     private vehicleService: VehicleService,
@@ -43,8 +42,7 @@ export class VehicleDetailsComponent implements OnInit {
     if(confirm) {
       this.vehicleService.deleteVehicleById(vehicleId).subscribe(
         reponse => {
-          console.log("Delete succeeded");
-          console.log(reponse);    
+          this.showVehiclesByUserSection = true;
         },
         error => {
           console.log("Fail to delete");
@@ -59,19 +57,23 @@ export class VehicleDetailsComponent implements OnInit {
     this.router.navigate(['home']);
   }
 
-  onMoreBySellerClick(userId: number) {
-    this.loadVehiclesBySeller(userId);
+  onEditClick() {
+    this.showEditForm = true;
+  }
+
+  onMoreBySellerClick() {
     this.showVehiclesByUserSection = true;
   }
 
-
-  onVehicleIdChange(vehicleId: any) {
-    console.log("VehicleCahnge " + vehicleId);
-    
+  onVehicleIdChange(vehicleId: any) {    
     this.loadVehicleByIdData(vehicleId);
     this.showVehiclesByUserSection = false;
-
   }
+
+  onCloseForm(event: any) {
+    this.showEditForm = event;
+  }
+
 
   loadVehicleByIdData(id: number) {    
     this.vehicleService.getVehicleById(id).subscribe(
@@ -86,17 +88,6 @@ export class VehicleDetailsComponent implements OnInit {
     this.http.get<UserPublicDetails>(`${API_URI}/users/${userId}`).subscribe(
       response => {
         this.userPublicDetails = response;        
-      }
-    );
-  }
-
-  loadVehiclesBySeller(userId: number) {
-    this.vehicleService.getVehiclesByUser(userId).subscribe(
-      response => {
-        this.vehiclesByUser = response;
-      },
-      error => {
-        console.log(error);
       }
     );
   }

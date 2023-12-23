@@ -1,9 +1,9 @@
-
-
-import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { VehiclePostDTO } from 'src/app/interface/vehicle.interfaces';
-import { VehicleFormPostService } from 'src/app/service/data/vehicle-form-post.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { VehicleRequestBody } from 'src/app/interface/vehicle.interfaces';
+import { VehicleFormService } from 'src/app/service/data/vehicle-form-post.service';
+import { VehicleDetails } from '../vehicle-details/vehicle-details.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vehicle-form',
@@ -12,68 +12,85 @@ import { VehicleFormPostService } from 'src/app/service/data/vehicle-form-post.s
 })
 export class VehicleFormComponent implements OnInit {
 
-  vehiclePostDTO!: VehiclePostDTO
-  togleForm!: boolean;
-  photos: any[] = new Array(5);
+  vehicle!: VehicleRequestBody
   vehicleId!: number | undefined;
   isLoadingContent!: boolean;
+  @Input() editVehicle!: VehicleDetails;
+  @Output() isFormVisible = new EventEmitter;
+  showPhotos: boolean = false;
+  isVehicleEdited: boolean = false;
 
   constructor(
-    private vehiclePostService: VehicleFormPostService,
+    private vehicleService: VehicleFormService,
+    private http: HttpClient,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.togleForm = true;
     this.isLoadingContent = false;
-    this.vehiclePostDTO = new VehiclePostDTOImpl("", "", new Date().getFullYear());
+    if (this.editVehicle) {
+      this.vehicle = new FormVehicleRequestBody(this.editVehicle.vehicle.name, this.editVehicle.vehicle.model, this.editVehicle.vehicle.year);
+      this.showPhotos = true;
+    } else {
+      this.vehicle = new FormVehicleRequestBody("", "", new Date().getFullYear());
+    }
   }
 
   onSubmitVehicleForm() {
-    this.vehiclePostService.postVehicle(this.vehiclePostDTO).subscribe(
+    this.vehicle.id = this.editVehicle.vehicle.id;
+    this.executeVehiclePutRequest();
+  }
+
+  // Handles update of a Vehicle
+  executeVehiclePutRequest() {    
+    this.vehicleService.putVehicle(this.vehicle).subscribe(
       data => {
-        this.vehicleId = data.id;
-        this.togleForm = false;
-        this.isLoadingContent = false;
-      },
-      error => {
-        console.log(error);
-        this.isLoadingContent = false;
-      }
-    )
-    this.isLoadingContent = true;
-  }
-
-  onFormPhotosSubmit() {
-    const formData = new FormData();
-    for (let photo of this.photos) {
-      if (photo) {
-        formData.append('photos', photo);
-      }
-    }
-    this.onSubmitVehiclePhoto(formData);
-  }
-
-  onSubmitVehiclePhoto(formData:FormData) {
-    this.vehiclePostService.postVehiclePhotos(this.vehicleId, formData).subscribe(
-      response => {    
-        this.isLoadingContent = false;                  
+        window.location.reload();
+        this.closeForm();
       },
       error => {
         console.log(error)
-        this.isLoadingContent = false;                  
       }
-    );
-    this.isLoadingContent = true;
+    )
   }
 
-  onInputFileChange(event: any, arrayIndex: number) {
+  vehicleDataChange() {
+    this.isVehicleEdited = true;
+  }
+
+  // Handles update of photos
+  executePhotoPutRequest(formData: FormData, photoUrl: string) {
+    this.http.put<any>(photoUrl, formData).subscribe(
+      response => {
+        this.reloadPhotos();
+        this.isVehicleEdited = true;
+      },
+    )
+  }
+
+  onUpdatePhotoChange(event: any, photoUrl: string) {
     if (event.target.files && event.target.files[0]) {
-      this.photos[arrayIndex] = event.target.files[0];
+      let photo = event.target.files[0];
+      const formData = new FormData();
+      formData.append('photo', photo);
+      this.executePhotoPutRequest(formData, photoUrl);
+    }
+  }
+
+  reloadPhotos() {
+    this.showPhotos = false;
+    setTimeout(() => this.showPhotos = true);
+  }
+
+  closeForm() {    
+    this.isFormVisible.emit(false);
+    if(this.isVehicleEdited) {
+      this.router.navigate(['vehicle-details/', this.vehicle.id]);
     }
   }
 }
 
-export class VehiclePostDTOImpl implements VehiclePostDTO {
+export class FormVehicleRequestBody implements VehicleRequestBody {
   public name: string;
   public model: string;
   public year: number;
@@ -84,4 +101,6 @@ export class VehiclePostDTOImpl implements VehiclePostDTO {
     this.year = year;
   }
 }
+
+
 

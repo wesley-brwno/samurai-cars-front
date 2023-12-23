@@ -11,6 +11,7 @@ import { AdminModule } from './admin/admin.module';
 import { CatalogoModule } from './catalogo/catalogo.module';
 import { VehicleModule } from './vehicle/vehicle.module';
 import { AuthIntercepterService } from './service/http/auth-intercepter.service';
+import { UserModule } from './user/user.module';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { AuthIntercepterService } from './service/http/auth-intercepter.service'
     AuthModule,
     AdminModule,
     CatalogoModule,
-    VehicleModule
+    VehicleModule,
+    UserModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthIntercepterService, multi:true} 
