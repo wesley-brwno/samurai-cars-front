@@ -2,7 +2,7 @@
     box-sizing: border-box;
     background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
     height: fit-content;
-    min-height: 90vh;
+    min-height: 100vh;
     padding: 1rem;
 }
 
@@ -36,6 +36,8 @@
     right: 1.5rem;
 }
 
+/* Table styles */
+
 .table_container {
     width: 100vw;
     background-color: rebeccapurple;
@@ -47,7 +49,19 @@
     text-align: center;
     width: fit-content;
     max-width: 70vw;
+    background-color: white;
     margin: auto;
+}
+
+.table_container tr:nth-child(odd) {
+    background-color: #f2f2f2;
+  }
+  
+
+.table_container table tbody tr:hover {
+    cursor: pointer;
+    background-color: rgba(32, 178, 171, 0.486);
+    text-decoration: underline;
 }
 
 /* Form styles */
@@ -63,4 +77,29 @@
 .buttons_container div{
     display: flex;
     justify-content: space-between;
+}
+
+@media screen and (max-width: 700px) {
+    .form_container {
+        width: 60vw;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .profile_section {
+        padding: 1px;
+    }
+    .table_container {
+        padding: 0;
+        padding-bottom: 4.5rem;
+    }
+    .optional_column {
+        display: none;
+    }
+    .btn_return {
+        bottom: 1%;
+    }
+    .form_container {
+        width: 90vw;
+    }
 }
