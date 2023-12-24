@@ -47,7 +47,7 @@ export class VehicleDetailsComponent implements OnInit {
     if(confirm) {
       this.vehicleService.deleteVehicleById(vehicleId).subscribe(
         reponse => {
-          this.showVehiclesByUserSection = true;
+          this.router.navigate(['profile']);
         },
         error => {
           console.log("Fail to delete");

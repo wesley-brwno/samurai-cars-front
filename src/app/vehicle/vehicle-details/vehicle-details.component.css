@@ -94,6 +94,10 @@
     background-color: #34C308;
 }
 
+.btn_chat button:hover{
+    background-color: #34c3089a;
+}
+
 .btn_home button:hover {
     background-color: #eeeeee;
     border: 2px solid black;
