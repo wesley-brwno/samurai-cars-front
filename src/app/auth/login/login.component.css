@@ -1,16 +1,7 @@
-.login-section {
+.sign-section {
     display:flex;
     align-items: center;
+    height: fit-content;
+    min-height: 85vh;
+    background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
 }
-.login-container {
-    display: inline-block;
-    width: 40%;
-    margin: 2rem auto;
-}
-
-@media  screen and (max-width: 555px) {
-    .login-container {
-        width: 80%;
-    }
-}
-  

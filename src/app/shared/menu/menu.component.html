@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-color">
     <div class="container-fluid">
-        <a href="#" class="navbar-brand">Samurai's Cars</a>
+        <a href="''" class="navbar-brand">Samurai's Cars</a>
         <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -8,12 +8,9 @@
             <div class="navbar-nav">
                 
                 <a href="home" class="nav-item nav-link active">Home</a>
-                <a href="resource-management" class="nav-item nav-link active"
+                <a href="account" class="nav-item nav-link active"
                     *ngIf="authenticationService.isUserLogged()"
-                >Manage</a>
-                <a href="profile" class="nav-item nav-link active"
-                    *ngIf="authenticationService.isUserLogged()"
-                >Profile</a>
+                >Account</a>
 
             </div>
 

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { API_URI } from 'src/app/app.constants';
+import { NewUser } from 'src/app/auth/login/login.component';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,10 @@ export class AuthenticationService {
         sessionStorage.setItem('loggedUser', username);        
       }
     ));
+  }
+
+  regiterNewUser(user: NewUser) {
+    return this.http.post(`${API_URI}/auth/register`, user);
   }
 
   logout() {
