@@ -1,0 +1,22 @@
+<section class="messages_section">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>name</th>
+                <th>email</th>
+                <th>date</th>
+                <th>read</th>
+                <th>delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let message of messagePegeable.content">
+                <td>{{ message.name }} {{ message.lastname }}</td>
+                <td>{{ message.email }}</td>
+                <td>{{ message.created_at | date: 'medium' }}</td>
+                <td>Read</td>
+                <td>Delete</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
