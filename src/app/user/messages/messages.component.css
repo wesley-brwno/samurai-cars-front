@@ -1,0 +1,58 @@
+.table {
+    width: fit-content;
+    margin: auto;
+    min-width: 60vw;
+}
+
+.card {
+    margin: 3px;
+}
+
+.senderDetails {
+    text-align: center;
+}
+
+.contact_info {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.vehicleDetails {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 2px;
+}
+
+.vehicleDetails img {
+    height: 100px;
+    width: fit-content;
+}
+
+.vehicle_info {
+    display: flex;
+    height: 100px;
+    align-items: center;
+    justify-content: left;
+}
+
+.vehicle_info p {
+    width: 100%;
+    text-align: left;
+    margin: 2px;
+}
+
+@media screen and (max-width: 560px) {
+    .table {
+        width: 90vw;
+    }
+    .table tr {
+        width: 100%;
+    }
+    .hideInMobile {
+        display: none;
+    }    
+}

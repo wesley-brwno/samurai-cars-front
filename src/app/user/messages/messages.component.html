@@ -3,20 +3,65 @@
         <thead>
             <tr>
                 <th>name</th>
-                <th>email</th>
+                <th class="hideInMobile">email</th>
                 <th>date</th>
                 <th>read</th>
-                <th>delete</th>
+                <th class="hideInMobile">delete</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let message of messagePegeable.content">
+            <tr *ngFor="let message of messagePegeable.content" [ngClass]="{'table-active' : message.is_read}">
                 <td>{{ message.name }} {{ message.lastname }}</td>
-                <td>{{ message.email }}</td>
+                <td class="hideInMobile" >{{ message.email }}</td>
                 <td>{{ message.created_at | date: 'medium' }}</td>
-                <td>Read</td>
-                <td>Delete</td>
+                <td>
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                        (click)="onReadClick(message)"
+                    >Read</button>
+                </td>
+                <td class="hideInMobile">
+                    <button type="button" class="btn btn-danger"
+                    (click)="onDeleteClick(message.id)"
+                    >Delete</button>
+                </td>
             </tr>
         </tbody>
     </table>
+  
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">Message</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" *ngIf="contactMessage">
+            <div class="senderDetails card">
+                <h2>{{ contactMessage.name }} {{ contactMessage.lastName }}</h2>
+                <div class="contact_info">
+                    <p>Phone: {{ contactMessage.phone }}</p>
+                    <p>Email: {{ contactMessage.email }}</p>
+                </div>
+            </div>
+            <div class="vehicleDetails card">
+                <img [src]="vehicelDetails.images.photos[0]" class="img-thumbnail" [alt]="vehicelDetails.vehicle.name">
+                <div class="vehicle_info card">
+                    <p>Name: {{ vehicelDetails.vehicle.name }}</p>
+                    <p>Model: {{ vehicelDetails.vehicle.model }}</p>
+                    <p>Year: {{ vehicelDetails.vehicle.year }}</p>
+                </div>
+            </div>
+            <div class="card">
+                {{ contactMessage.message }}
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+            (click)="onDeleteClick(contactMessage.id)"
+          >Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>

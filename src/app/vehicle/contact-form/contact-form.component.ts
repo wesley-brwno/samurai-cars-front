@@ -15,6 +15,7 @@ export class ContactFormComponent implements OnInit{
   @Input() vehiclePhotos!: Images;
   @Output() closeForm = new EventEmitter();
   userPublicDetails!: UserPublicDetails;
+  contactForm!: ContactForm;
 
   constructor(
     private http: HttpClient,
@@ -23,10 +24,27 @@ export class ContactFormComponent implements OnInit{
   }
   ngOnInit(): void {
     this.laodUserPublicDetails(this.selectedVehicle.user_id);
+    this.contactForm = new ContactForm('', '', '', '', '', this.selectedVehicle.id);
   }
 
   onCloseForm() {
     this.closeForm.emit(true);
+  }
+
+  onSubmitMessage() {
+    console.log("Method was opened");
+    
+    this.http.post<ContactForm>(`${API_URI}/messages`, this.contactForm).subscribe(
+      response => {
+        window.confirm("Your message was sent!");
+        this.onCloseForm();  
+      },
+      error => {
+        console.log(error);   
+        console.log("Fail");
+             
+      }
+    )
   }
 
   laodUserPublicDetails(userId: number) {
@@ -36,4 +54,15 @@ export class ContactFormComponent implements OnInit{
       }
     );
   }
+}
+
+export class ContactForm {
+  constructor(
+    public name: string,
+    public lastname:string,
+    public phone: string,
+    public email: string,
+    public message: string,
+    public vehicle_id: number
+  ) {}
 }

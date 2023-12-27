@@ -1,5 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { API_URI } from 'src/app/app.constants';
+import { User } from 'src/app/interface/user.interfaces';
 import { VehicleByUser } from 'src/app/interface/vehicle.interfaces';
 import { VehicleService } from 'src/app/service/data/vehicle.service';
 
@@ -14,9 +17,11 @@ export class VehiclesByUserComponent implements OnInit{
   @Output()
   selectVehicleId = new EventEmitter();
   currentVehicleId!: number;
-  vehiclesByUser!: VehicleByUser[]
+  vehiclesByUser!: VehicleByUser[];
+  userName!: string;
 
   constructor(
+    private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute,
     private vehicleService: VehicleService
@@ -24,7 +29,8 @@ export class VehiclesByUserComponent implements OnInit{
 
   ngOnInit(): void {
     this.currentVehicleId = this.route.snapshot.params['id'];
-    this.loadVehiclesBySeller(this.userId)      
+    this.loadVehiclesBySeller(this.userId) ;
+    this.loadUserName();     
   }
 
   onSelectVehicleClick(vehicleId: number) {
@@ -39,6 +45,17 @@ export class VehiclesByUserComponent implements OnInit{
       },
       error => {
         console.log(error);
+      }
+    );
+  }
+
+  loadUserName() {
+    this.http.get<User>(`${API_URI}/users`).subscribe(
+      response => {
+        this.userName = response.name;
+      },
+      error => {
+        console.log(error); 
       }
     );
   }

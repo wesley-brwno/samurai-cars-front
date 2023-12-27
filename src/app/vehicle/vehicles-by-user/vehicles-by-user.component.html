@@ -1,5 +1,5 @@
 <section class="vehicles_by_user" *ngIf="vehiclesByUser">
-  <h2>Vehicles by </h2>
+  <h2>Vehicles by {{ userName }}</h2>
   <div class="cards_container">
     <div class="card vehicle_card"
       *ngFor="let content of vehiclesByUser"
