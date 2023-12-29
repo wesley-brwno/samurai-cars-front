@@ -84,6 +84,11 @@
 <ng-template #vehicleFormSection>
   <section class="form-section">
     <form class="form_container" (ngSubmit)="onVehicleSubmit()">
+      <div *ngIf="errorMap && !showPhotosForm">
+        <div class="alert alert-warning" role="alert" *ngFor="let error of errorMap | keyvalue">
+            <span>{{error.key}} : {{error.value}}</span>
+        </div>
+    </div>
       <div class="mb-3">
         <label for="carName" class="form-label">Vehicle name</label>
         <input type="text" class="form-control" id="name" name="carName" [(ngModel)]="vehicleForm.name"/>
@@ -113,6 +118,12 @@
     <form *ngIf="showPhotosForm" (ngSubmit)="onPhotosSubmit()" class="form_container">
       <div class="vehicle-saved-msg">
         <h2>Vehicele saved, add some photos!</h2>
+      </div>
+
+      <div *ngIf="errorMap">
+        <div class="alert alert-warning" role="alert" *ngFor="let error of errorMap | keyvalue">
+            <span>{{error.key}} : {{error.value}}</span>
+        </div>
       </div>
 
       <div class="input-group mb-3">

@@ -4,6 +4,7 @@ import { VehicleRequestBody } from 'src/app/interface/vehicle.interfaces';
 import { VehicleFormService } from 'src/app/service/data/vehicle-form-post.service';
 import { VehicleDetails } from '../vehicle-details/vehicle-details.component';
 import { Router } from '@angular/router';
+import { ApiErrorResponse } from 'src/app/interface/http-error-response';
 
 @Component({
   selector: 'app-vehicle-form',
@@ -19,7 +20,9 @@ export class VehicleFormComponent implements OnInit {
   @Output() isFormVisible = new EventEmitter;
   showPhotos: boolean = false;
   isVehicleEdited: boolean = false;
-
+  errorMap!: Map<string, string>;
+  validationErrorResponse!: ApiErrorResponse;
+  
   constructor(
     private vehicleService: VehicleFormService,
     private http: HttpClient,
@@ -49,7 +52,11 @@ export class VehicleFormComponent implements OnInit {
         this.closeForm();
       },
       error => {
-        console.log(error)
+        console.log(error);
+        this.validationErrorResponse = error;
+        let fileds = this.validationErrorResponse.error.fields.split(',');
+        let message = this.validationErrorResponse.error.fields_message.split(',');
+        this.createErrorMap(fileds, message);
       }
     )
   }
@@ -86,6 +93,13 @@ export class VehicleFormComponent implements OnInit {
     this.isFormVisible.emit(false);
     if(this.isVehicleEdited) {
       this.router.navigate(['vehicle-details/', this.vehicle.id]);
+    }
+  }
+
+  private createErrorMap(fields: string[], messages: string[]) {
+    this.errorMap = new Map<string, string>;
+    for (let i = 0; i < fields.length; i++) {
+      this.errorMap.set(fields[i], messages[i]);
     }
   }
 }

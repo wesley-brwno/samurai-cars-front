@@ -12,7 +12,11 @@
             </div>
         </div>
         <hr>
-
+        <div *ngIf="errorMap">
+            <div class="alert alert-warning" role="alert" *ngFor="let error of errorMap | keyvalue">
+                <span>{{error.key}} : {{error.value}}</span>
+            </div>
+        </div>
         <fieldset>
             <div class="row mb-4">
                 <div class="col">
@@ -36,8 +40,8 @@
             <div class="row mb-4">
                 <div class="col">
                     <div data-mdb-input-init class="form-outline">
-                        <label class="form-label" for="form6Example1">Phone</label>
-                        <input type="tel" id="form6Example1" class="form-control" name="phoneNumber"
+                        <label class="form-label" for="phone">Phone</label>
+                        <input type="tel" id="phone" class="form-control" name="phoneNumber" placeholder="eleven numbers"
                             [(ngModel)]="contactForm.phone"
                         />
                     </div>

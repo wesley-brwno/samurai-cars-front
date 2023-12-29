@@ -12,6 +12,12 @@
       </div>
     </div>
 
+    <div *ngIf="errorMap">
+      <div class="alert alert-warning" role="alert" *ngFor="let error of errorMap | keyvalue">
+          <span>{{error.key}} : {{error.value}}</span>
+      </div>
+    </div>
+    
     <div class="mb-3">
       <label for="carName" class="form-label">Car name</label>
       <input type="text" class="form-control" id="name" name="carName" [(ngModel)]="vehicle.name"

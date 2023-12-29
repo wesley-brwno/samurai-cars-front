@@ -46,13 +46,12 @@ export class VehicleDetailsComponent implements OnInit {
 
     if(confirm) {
       this.vehicleService.deleteVehicleById(vehicleId).subscribe(
-        reponse => {
-          this.router.navigate(['profile']);
+        response => {          
+          this.router.navigate(['account']);
         },
         error => {
           console.log("Fail to delete");
-          console.log(error);
-          
+          console.log(error);     
         }
       )
     }

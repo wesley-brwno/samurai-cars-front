@@ -3,6 +3,7 @@ import { Images, Vehicle } from 'src/app/interface/vehicle-pabeable.intefaces';
 import { UserPublicDetails } from '../vehicle-details/vehicle-details.component';
 import { API_URI } from 'src/app/app.constants';
 import { HttpClient } from '@angular/common/http';
+import { ApiErrorResponse } from 'src/app/interface/http-error-response';
 
 @Component({
   selector: 'app-contact-form',
@@ -16,6 +17,8 @@ export class ContactFormComponent implements OnInit{
   @Output() closeForm = new EventEmitter();
   userPublicDetails!: UserPublicDetails;
   contactForm!: ContactForm;
+  errorMap!: Map<string, string>;
+  apiValidationException!: ApiErrorResponse;
 
   constructor(
     private http: HttpClient,
@@ -41,8 +44,10 @@ export class ContactFormComponent implements OnInit{
       },
       error => {
         console.log(error);   
-        console.log("Fail");
-             
+        this.apiValidationException = error;
+        let fields = this.apiValidationException.error.fields.split(',');
+        let messages = this.apiValidationException.error.fields_message.split(',');
+        this.createErrorMap(fields, messages);
       }
     )
   }
@@ -53,6 +58,13 @@ export class ContactFormComponent implements OnInit{
         this.userPublicDetails = response;        
       }
     );
+  }
+
+  private createErrorMap(fields: string[], messages: string[]) {
+    this.errorMap = new Map<string, string>;
+    for (let i = 0; i < fields.length; i++) {
+      this.errorMap.set(fields[i], messages[i]);
+    }
   }
 }
 

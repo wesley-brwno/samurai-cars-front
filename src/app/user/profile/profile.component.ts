@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, of, tap } from 'rxjs';
 import { API_URI } from 'src/app/app.constants';
+import { ApiErrorResponse } from 'src/app/interface/http-error-response';
 import { User } from 'src/app/interface/user.interfaces';
 import { VehicleByUser } from 'src/app/interface/vehicle.interfaces';
 import { VehicleService } from 'src/app/service/data/vehicle.service';
@@ -24,6 +25,8 @@ export class ProfileComponent implements OnInit{
   showPhotosForm!: boolean;
   photos!: any[];
   savedVehileId?: number;
+  errorMap!: Map<string, string>;
+  apiValidationError!: ApiErrorResponse;
 
   constructor(
     private vehicleService: VehicleService,
@@ -74,11 +77,25 @@ export class ProfileComponent implements OnInit{
         this.savingData = false;
         this.photos = new Array(5);
         this.showPhotosForm = true;
+        if(this.errorMap) {
+          this.errorMap.clear();
+        }
       },
       error => {
-        console.log(error);      
+        this.apiValidationError = error;
+        let fields = this.apiValidationError.error.fields.split(',');  
+        let messages = this.apiValidationError.error.fields_message.split(',');
+        this.createErrorMap(fields, messages); 
+        this.savingData = false; 
       }
     )
+  }
+
+  private createErrorMap(fields: string[], messages: string[]) {
+    this.errorMap = new Map<string, string>;
+    for (let i = 0; i < fields.length; i++) {
+      this.errorMap.set(fields[i], messages[i]);
+    }
   }
 
   // Handles photos upload
@@ -107,7 +124,7 @@ export class ProfileComponent implements OnInit{
           this.router.navigate(['vehicle-details/', this.savedVehileId]);
         }),
         catchError(error => {
-          console.log(error);
+          this.createErrorMap(['Bad Request'], [error.error.message]);
           return of(null);
         })
       )
