@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiErrorResponse } from 'src/app/interface/http-error-response';
+import { ApiErrorResponse, ApiExceptionResponse } from 'src/app/interface/http-error-response';
 import { AuthenticationService } from 'src/app/service/auth/authentication.service';
 
 @Component({
@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   newUser!: NewUser;
   toggleForm!: boolean;
   apiErrorResponse!: ApiErrorResponse;
+  apiExceptionResponse!: ApiExceptionResponse;
   errorMap!: Map<string, string>;
 
   constructor(
@@ -42,6 +43,13 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['account']);
       },
       error => {
+        console.log(error);
+        
+        if(error.status === 403) {
+          this.apiExceptionResponse = error;
+          this.createErrorMap(['error'], [this.apiExceptionResponse.error.title]);
+          return;
+        }      
         this.apiErrorResponse = error;
         let errorFields = this.apiErrorResponse.error.fields.split(',');
         let errorMessages = this.apiErrorResponse.error.fields_message.split(',');
@@ -60,7 +68,7 @@ export class LoginComponent implements OnInit {
         this.apiErrorResponse = error;
         let errorFields = this.apiErrorResponse.error.fields.split(',');
         let errorMessages = this.apiErrorResponse.error.fields_message.split(',');
-        this.createErrorMap(errorFields, errorMessages)
+        this.createErrorMap(errorFields, errorMessages);
       }
     )
   }
