@@ -10,6 +10,11 @@
               </a>
             </div>
             <h2 class="fs-6 fw-normal text-center text-secondary mb-4">Sign in to your account</h2>
+            <div *ngIf="errorMap" >
+              <div class="alert alert-warning" role="alert" *ngFor="let item of errorMap | keyvalue">
+                <span>{{item.key}} : {{item.value}}</span>
+              </div>
+            </div>
             <form (ngSubmit)="onSubmitLogin()">
               <div class="row gy-2 overflow-hidden">
                 <div class="col-12">
@@ -54,6 +59,11 @@
               </a>
             </div>
             <h2 class="fs-6 fw-normal text-center text-secondary mb-4">Create an account</h2>
+            <div *ngIf="errorMap" >
+              <div class="alert alert-warning" role="alert" *ngFor="let item of errorMap | keyvalue">
+                <span>{{item.key}} : {{item.value}}</span>
+              </div>
+            </div>
             <form (ngSubmit)="onSubmitSignup()">
               <div class="row gy-2 overflow-hidden">
                 <div class="col-12">
@@ -81,7 +91,7 @@
                   </div>
                 </div>
                 <div class="col-12">
-                  <p class="m-0 text-secondary text-center">Already have an account? <a (click)="toggleForm = false" class="link-primary text-decoration-none">log in</a></p>
+                  <p class="m-0 text-secondary text-center">Already have an account? <a (click)="onToggleFormClick()" class="link-primary text-decoration-none">log in</a></p>
                 </div>
               </div>
             </form>

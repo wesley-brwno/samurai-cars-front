@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApiErrorResponse } from 'src/app/interface/http-error-response';
 import { AuthenticationService } from 'src/app/service/auth/authentication.service';
 
 @Component({
@@ -12,6 +13,8 @@ export class LoginComponent implements OnInit {
   user!: User;
   newUser!: NewUser;
   toggleForm!: boolean;
+  apiErrorResponse!: ApiErrorResponse;
+  errorMap!: Map<string, string>;
 
   constructor(
     public authenticationService: AuthenticationService,
@@ -27,6 +30,7 @@ export class LoginComponent implements OnInit {
   onShowCreateAccountForm() {
     this.toggleForm = true;
     this.newUser = new NewUser('', '', '');
+    this.errorMap.clear();
   }
 
   onSubmitLogin() {
@@ -36,6 +40,12 @@ export class LoginComponent implements OnInit {
     ).subscribe(
       data => {
         this.router.navigate(['account']);
+      },
+      error => {
+        this.apiErrorResponse = error;
+        let errorFields = this.apiErrorResponse.error.fields.split(',');
+        let errorMessages = this.apiErrorResponse.error.fields_message.split(',');
+        this.createErrorMap(errorFields, errorMessages)
       }
     )
   }
@@ -47,9 +57,24 @@ export class LoginComponent implements OnInit {
         this.toggleForm = false;
       },
       error => {
-        console.log(error);     
+        this.apiErrorResponse = error;
+        let errorFields = this.apiErrorResponse.error.fields.split(',');
+        let errorMessages = this.apiErrorResponse.error.fields_message.split(',');
+        this.createErrorMap(errorFields, errorMessages)
       }
     )
+  }
+
+  onToggleFormClick() {
+    this.toggleForm = false;
+    this.errorMap.clear();
+  }
+
+  private createErrorMap(fields: string[], messages: string[]) {
+    this.errorMap = new Map<string, string>;
+    for (let i = 0; i < fields.length; i++) {
+      this.errorMap.set(fields[i], messages[i]);
+    }
   }
 }
 
