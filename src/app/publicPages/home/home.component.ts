@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit{
   toggleSection: boolean = false;
   loggedUserId!: number;
   selectedVehicle!: Content;
+  loadingContent!: boolean;
 
   constructor(
     public vehiclePageableService: VehiclePageableService,
@@ -22,14 +23,17 @@ export class HomeComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
+    this.loadingContent = true;
     let page = (sessionStorage.getItem('currentPage') ?? '0');
     this.vehiclePageableService.getVehiclesPageable(`?size=6&page=${page}`).subscribe(
       data => {
         this.vehiclePage = data;
-        this.loadPageNumbersArray();    
+        this.loadPageNumbersArray();
+        this.loadingContent = false;   
       },
       error => {
         console.log(error);
+        this.loadingContent = false;   
       }
     );
     sessionStorage.removeItem('currentPage');

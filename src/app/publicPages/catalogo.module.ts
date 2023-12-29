@@ -14,4 +14,4 @@ import { VehicleModule } from '../vehicle/vehicle.module';
     VehicleModule
   ]
 })
-export class CatalogoModule { }
+export class publicPagesModule { }

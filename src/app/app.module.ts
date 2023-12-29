@@ -7,10 +7,10 @@ import { SharedModule } from './shared/shared.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AuthModule } from './auth/auth.module';
-import { CatalogoModule } from './catalogo/catalogo.module';
 import { VehicleModule } from './vehicle/vehicle.module';
 import { AuthIntercepterService } from './service/http/auth-intercepter.service';
 import { UserModule } from './user/user.module';
+import { publicPagesModule } from './publicPages/catalogo.module';
 
 
 @NgModule({
@@ -24,7 +24,7 @@ import { UserModule } from './user/user.module';
     HttpClientModule,
     FormsModule,
     AuthModule,
-    CatalogoModule,
+    publicPagesModule,
     VehicleModule,
     UserModule
   ],

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
-import { HomeComponent } from './catalogo/home/home.component';
+import { HomeComponent } from './publicPages/home/home.component';
 import { VehicleFormComponent } from './vehicle/vehicle-form/vehicle-form.component';
 import { VehicleDetailsComponent } from './vehicle/vehicle-details/vehicle-details.component';
 import { ProfileComponent } from './user/profile/profile.component';

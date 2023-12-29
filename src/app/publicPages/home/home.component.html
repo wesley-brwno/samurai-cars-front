@@ -1,6 +1,13 @@
 <section class="catalogo">
   <div [hidden]="toggleSection">
     <div class="cards-container">
+
+      <div class="d-flex justify-content-center" *ngIf="loadingContent">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+
       <div class="card vehicle-container"
         *ngFor="let content of vehiclePage.content"
       >
