@@ -6,6 +6,10 @@
     padding: 1rem;
 }
 
+.profile_section h1 {
+    text-align: center;
+}
+
 /* Action cards styles */
 .cards_container {
     display: flex;
@@ -40,15 +44,13 @@
 
 .table_container {
     width: 100vw;
-    background-color: rebeccapurple;
-    background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
-    padding: 1.5rem;
+    padding-bottom: 3rem;
 }
 
 .table_container table {
     text-align: center;
     width: fit-content;
-    max-width: 70vw;
+    min-width: 70vw;
     background-color: white;
     margin: auto;
 }
