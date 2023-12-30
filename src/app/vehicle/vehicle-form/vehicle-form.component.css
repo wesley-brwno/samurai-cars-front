@@ -1,12 +1,13 @@
 .form-section {
-    position: absolute;
+    position: relative;
+    display: flex;
     align-items: center;
     justify-content: center;
     height: fit-content;
     min-height: 93vh;
     width: 100%;
     background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
-    z-index: 99;
+    z-index: 11;
 }
 
 .vehicle-form {
@@ -51,7 +52,7 @@
 
 .btn_return {
     position: fixed;
-    bottom: 10%;
+    bottom: 20%;
     right: 2rem;
 }
 @media  screen and (max-width: 900px) {

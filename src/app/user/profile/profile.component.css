@@ -2,7 +2,7 @@
     box-sizing: border-box;
     background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
     height: fit-content;
-    min-height: 90vh;
+    min-height: 88vh;
     padding: 1rem;
 }
 
@@ -36,14 +36,15 @@
 
 .btn_return {
     position: fixed;
-    bottom: 5%;
+    bottom: 20%;
     right: 1.5rem;
 }
 
 /* Table styles */
 
 .table_container {
-    width: 100vw;
+    width: 80vw;
+    margin: auto;
     padding-bottom: 3rem;
 }
 
@@ -57,7 +58,7 @@
 
 .table_container tr:nth-child(odd) {
     background-color: #f2f2f2;
-  }
+}
   
 
 .table_container table tbody tr:hover {

@@ -5,8 +5,10 @@ import { HomeComponent } from './publicPages/home/home.component';
 import { VehicleFormComponent } from './vehicle/vehicle-form/vehicle-form.component';
 import { VehicleDetailsComponent } from './vehicle/vehicle-details/vehicle-details.component';
 import { ProfileComponent } from './user/profile/profile.component';
+import { LandingComponent } from './publicPages/landing/landing.component';
 
 const routes: Routes = [
+  {path: '', component: LandingComponent},
   {path: 'login', component: LoginComponent},
   {path: 'account', component: ProfileComponent},
   {path: 'home', component: HomeComponent},
