@@ -1,6 +1,6 @@
 .vehicles_by_user {
     height: max-content;
-    min-height: 100vh;
+    min-height: 81vh;
     background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
 }
 

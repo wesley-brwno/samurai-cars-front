@@ -2,7 +2,7 @@
     box-sizing: border-box;
     background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
     height: fit-content;
-    min-height: 88vh;
+    min-height: 81vh;
     padding: 1rem;
 }
 

@@ -2,6 +2,6 @@
     display:flex;
     align-items: center;
     height: fit-content;
-    min-height: 85vh;
+    min-height: 81vh;
     background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
 }

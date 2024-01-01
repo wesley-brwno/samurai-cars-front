@@ -44,8 +44,8 @@
 
 .btn_return {
     position: fixed;
-    bottom: 5%;
     right: 1.5rem;
+    bottom: 15%;
 }
 
 @media screen and (max-width: 800px) {
