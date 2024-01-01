@@ -1,5 +1,49 @@
+.landing_page {
+    box-sizing: border-box;
+    min-height: 81.8vh;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+}
+
 .landing_page img {
     height: 200px;
-    width: fit-content;
+    width: 22.5rem;
     margin: auto;
+    text-align: center;
+    object-fit: cover;
+}
+
+#landingPg_cards {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-around;
+}
+
+#landingPg_cards h5,
+#landingPg_cards p {
+    text-align: center;
+}
+
+.card {
+    width: 23rem;
+}
+
+.btns_container {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    justify-content: space-around;
+}
+
+@media screen and (max-width: 400px) {
+    .landing_page img {
+        height: 150px;
+        width: 20rem;
+        margin: auto;
+        text-align: center;
+        object-fit: cover;
+    }
 }

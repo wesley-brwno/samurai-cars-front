@@ -18,6 +18,7 @@ export class VehiclesByUserComponent implements OnInit{
   selectVehicleId = new EventEmitter();
   currentVehicleId!: number;
   vehiclesByUser!: VehicleByUser[];
+  @Input()
   userName!: string;
 
   constructor(
@@ -30,7 +31,6 @@ export class VehiclesByUserComponent implements OnInit{
   ngOnInit(): void {
     this.currentVehicleId = this.route.snapshot.params['id'];
     this.loadVehiclesBySeller(this.userId) ;
-    this.loadUserName();     
   }
 
   onSelectVehicleClick(vehicleId: number) {
@@ -45,17 +45,6 @@ export class VehiclesByUserComponent implements OnInit{
       },
       error => {
         console.log(error);
-      }
-    );
-  }
-
-  loadUserName() {
-    this.http.get<User>(`${API_URI}/users`).subscribe(
-      response => {
-        this.userName = response.name;
-      },
-      error => {
-        console.log(error); 
       }
     );
   }

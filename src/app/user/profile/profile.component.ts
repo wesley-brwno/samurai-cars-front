@@ -139,6 +139,8 @@ export class ProfileComponent implements OnInit{
       response => {
         this.loggedUser = response;        
         sessionStorage.setItem('loggedUserId', this.loggedUser.user_id.toString());
+        console.log(this.loggedUser.authorities);
+        
         sessionStorage.setItem('loggedUserRole', this.loggedUser.authorities.toString());
       },
       error => {

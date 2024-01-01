@@ -74,7 +74,9 @@
 <ng-template #vehicles_by_user>
   <app-vehicles-by-user [hidden]="showEditForm || showContactForm" 
     (selectVehicleId)="onVehicleIdChange($event)" 
-    [userId]="vehicleDetails.vehicle.user_id">
+    [userId]="vehicleDetails.vehicle.user_id"
+    [userName]="userPublicDetails.name"
+  >
   </app-vehicles-by-user>
 </ng-template>
 
