@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { API_URI } from 'src/app/app.constants';
-import { Vehicle } from 'src/app/interface/vehicle-pabeable.intefaces';
+import { Vehicle } from 'src/app/interface/vehicle.interfaces';
 import { AuthenticationService } from 'src/app/service/auth/authentication.service';
 import { VehicleService } from 'src/app/service/data/vehicle.service';
 
@@ -20,6 +20,7 @@ export class VehicleDetailsComponent implements OnInit {
   showVehiclesByUserSection!: boolean;
   showEditForm!: boolean;
   showContactForm: boolean = false;
+  loadingContent!: boolean;
 
   constructor(
     private vehicleService: VehicleService,
@@ -80,8 +81,10 @@ export class VehicleDetailsComponent implements OnInit {
 
 
   loadVehicleByIdData(id: number) {    
+    this.loadingContent = true;
     this.vehicleService.getVehicleById(id).subscribe(
       response => {
+        this.loadingContent = false;
         this.vehicleDetails = response;
         this.laodUserPublicDetails(this.vehicleDetails.vehicle.user_id);                
       }

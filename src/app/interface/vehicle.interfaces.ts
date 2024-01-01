@@ -2,7 +2,10 @@ export interface VehicleRequestBody {
     id?: number
     name: string,
     model: string,
-    year: number
+    year: number,
+    vehicle_type: string,
+    brand: string,
+    price: number
 }
 
 export interface VehicleByUser {
@@ -19,6 +22,9 @@ export interface Vehicle {
     name: string;
     model: string;
     year: number;
+    vehicle_type: string,
+    brand: string,
+    price: number
 }
 
 export interface Images {

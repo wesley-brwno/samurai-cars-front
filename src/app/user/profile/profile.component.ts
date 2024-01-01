@@ -45,7 +45,7 @@ export class ProfileComponent implements OnInit{
   }
 
   onAddVehicleClick() {
-    this.vehicleForm = new FormVehicleRequestBody('', '', new Date().getFullYear())
+    this.vehicleForm = new FormVehicleRequestBody('', '', new Date().getFullYear(), '', '', 0)
     this.currentSection = 'vehicleForm';
     this.savingData = false;
   }
@@ -65,6 +65,7 @@ export class ProfileComponent implements OnInit{
 
   onCloseForm() {
     this.currentSection = 'actionsMenu';
+    this.errorMap.clear();
   }
 
   // Handles Vehicle upload

@@ -1,5 +1,12 @@
 <section [hidden]="showEditForm || showContactForm" class="vehicle_section" *ngIf="!showVehiclesByUserSection; else vehicles_by_user">
-  <div class="details">
+
+  <div class="d-flex justify-content-center" *ngIf="loadingContent">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+  
+  <div class="details" *ngIf="!loadingContent">
     <div class="vehicle_details card">
       <h2>{{ vehicleDetails.vehicle.name }}</h2>
       <table class="table table-bordered ">

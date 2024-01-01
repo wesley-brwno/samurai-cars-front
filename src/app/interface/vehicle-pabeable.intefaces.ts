@@ -1,10 +1,13 @@
 export interface Vehicle {
-    created_at: string;
+    created_at: Date;
     user_id: number;
     id: number;
     name: string;
     model: string;
     year: number;
+    vehicle_type: string,
+    brand: string,
+    price: number
 }
 
 export interface Images {

@@ -9,7 +9,6 @@ import { AuthenticationService } from 'src/app/service/auth/authentication.servi
 })
 export class LandingComponent {
 
-
   constructor(
     private authenicationService: AuthenticationService,
     private router: Router
@@ -21,10 +20,20 @@ export class LandingComponent {
         this.router.navigate(['account']);
       },
       error => {
-        console.log(error);
-        
+        console.log(error);   
       }
     );
   }
+
+  onUserClick() {
+    this.authenicationService.executeJWTAuthenticationService("xaropinho@email.com", "xaropinhoUser").subscribe(
+      response => {
+        this.router.navigate(['account']);
+      },
+      error => {
+        console.log(error);   
+      }
+    );
+  }    
 
 }

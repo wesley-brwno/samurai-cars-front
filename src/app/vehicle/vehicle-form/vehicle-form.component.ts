@@ -32,10 +32,10 @@ export class VehicleFormComponent implements OnInit {
   ngOnInit(): void {
     this.isLoadingContent = false;
     if (this.editVehicle) {
-      this.vehicle = new FormVehicleRequestBody(this.editVehicle.vehicle.name, this.editVehicle.vehicle.model, this.editVehicle.vehicle.year);
+      this.vehicle = this.editVehicle.vehicle;
       this.showPhotos = true;
     } else {
-      this.vehicle = new FormVehicleRequestBody("", "", new Date().getFullYear());
+      this.vehicle = new FormVehicleRequestBody("", "", new Date().getFullYear(), "", "", 0);
     }
   }
 
@@ -108,11 +108,17 @@ export class FormVehicleRequestBody implements VehicleRequestBody {
   public name: string;
   public model: string;
   public year: number;
+  public vehicle_type: string;
+  public brand: string;
+  public price: number;
 
-  constructor(name: string, model: string, year: number) {
+  constructor(name: string, model: string, year: number, vehicle_type: string, brand: string, price: number) {
     this.name = name;
     this.model = model;
     this.year = year;
+    this.vehicle_type = vehicle_type;
+    this.brand = brand;
+    this.price = price;
   }
 }
 
