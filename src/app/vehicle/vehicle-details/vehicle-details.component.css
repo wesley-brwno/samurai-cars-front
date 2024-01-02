@@ -1,6 +1,7 @@
 .vehicle_section {
-    background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
     min-height: 81vh;
+    box-sizing: border-box;
+    background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
 }
 
 .details {
@@ -8,17 +9,19 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap-reverse;
     gap: 1rem;
+    padding: 4px;
 }
 
 .vehicle_details,
 .user_details {
     display: block;
     height: 120px;
-    width: 350px;
+    width: max-content;
+    min-width: min-content;
     text-align: center;
-    padding: 5px;
-    margin: 5px;
+    padding-top: 0.5rem;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
 }
 
@@ -26,6 +29,18 @@
 .user_details h2 {
     font-size: 1.5rem;
     font-weight: bolder;
+}
+
+.vehicle_details thead th,
+.vehicle_details tbody td {
+    padding: 0 1rem;
+}
+
+.vehicle_details .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
 }
 
 .photos_container {
@@ -116,21 +131,9 @@
     color: black;
 }
 
-@media screen and (max-width: 550px) {
-    .photos_container img {
-        height: 250px;
-    }
-    .vehicle_details {
-        margin-left: -2rem;
-    }
-    .user_details {
-        margin-right: -2rem;
-    }
-}
-
 @media screen and (max-width: 600px) {
     .vehicle_section {
-        padding: 3rem;
+        padding: 1rem;
     }
     .butttons_container {
         display: flex;
@@ -141,6 +144,9 @@
         right: 1.5rem;
         width: 100vw;
         right: 0;
+    }
+    .hide {
+        display: none;
     }
 }
 
@@ -165,5 +171,8 @@
     .user_details {
         width: fit-content;
         margin: auto;
+    }
+    .hide {
+        display: none;
     }
 }

@@ -26,6 +26,9 @@
                 <td> {{content.vehicle.year}}</td>
                 <td> {{content.vehicle.created_at | date}}</td>
             </tbody>
+            <tfoot>
+              <td colspan="3">{{content.vehicle.price | currency:'BRL':true}}</td>
+            </tfoot>
           </table>
     
           <div>
