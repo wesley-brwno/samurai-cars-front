@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { API_URI } from 'src/app/app.constants';
 import { AuthenticationService } from 'src/app/service/auth/authentication.service';
 
 @Component({
@@ -8,6 +9,7 @@ import { AuthenticationService } from 'src/app/service/auth/authentication.servi
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent {
+  apiDocUrl: string = `${API_URI}/swagger-ui/index.html#/`
 
   constructor(
     private authenicationService: AuthenticationService,

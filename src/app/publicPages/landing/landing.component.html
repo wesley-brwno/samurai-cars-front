@@ -4,14 +4,10 @@
     <div class="card">
       <img src="https://th.bing.com/th/id/OIP.O2iROD7xW4tpPwvF2Bdk6gHaD6?rs=1&pid=ImgDetMain" class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title">Roles and Access</h5>
+        <h5 class="card-title">About</h5>
         <p class="card-text">
-          The application has two roles for logged users: USER and ADMIN. A USER can add and manage vehicles and
-          access messages sent to them. An ADMIN can do the same, and also manage USERs' vehicles if needed. In the
-          future, an ADMIN will also be able to manage USERs directly.
+          Welcome to Samurai's Cars, your one-stop destination for all your vehicle needs. Our website offers a wide range of vehicles for sale, from carriage to powerful tractors. We also provide a platform for owners to sell their vehicles by signing up on our website. Our user-friendly interface makes it easy to browse through our inventory and find the perfect car for you.
         </p>
-        <small>To access as a USER, an ADMIN, or to register a new account, click the corresponding button
-          below.</small>
       </div>
       <div class="card-footer">
         <div class="btns_container">
@@ -34,7 +30,9 @@
       </div>
       <div class="card-footer">
         <div class="btns_container">
-          <button type="button" class="btn btn-outline-dark">Go to Swagger API documentation</button>
+          <a [href]="apiDocUrl" target="_blank">
+            <button type="button" class="btn btn-outline-dark">Go to Swagger API documentation</button>
+          </a>
         </div>
       </div>
     </div>
