@@ -122,10 +122,12 @@ export class ProfileComponent implements OnInit{
     this.vehicleService.postVehiclePhotos(this.savedVehileId, this.getPhotosRequestBody())
       .pipe(
         tap(response => {
+          this.savingData = true;
           this.router.navigate(['vehicle-details/', this.savedVehileId]);
         }),
         catchError(error => {
           this.createErrorMap(['Bad Request'], [error.error.message]);
+          this.savingData = false;
           return of(null);
         })
       )

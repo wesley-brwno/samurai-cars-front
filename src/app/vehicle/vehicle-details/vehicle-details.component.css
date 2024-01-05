@@ -157,7 +157,8 @@
     }
     .photos_container div img {
         height: auto;
-        width: 80vw;
+        max-width: 80vw;
+        object-fit: cover;
     }
     .details {
         display: flex;

@@ -3,9 +3,10 @@
     <div class="cards-container">
 
       <div class="d-flex justify-content-center" *ngIf="loadingContent">
-        <div class="spinner-border" role="status">
-          <span class="visually-hidden">Loading...</span>
-        </div>
+        <button class="btn btn-primary" type="button" disabled>
+          <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
+          <span role="status">Getting things ready for you, just a short wait!</span>
+        </button>
       </div>
 
       <div class="card vehicle-container"

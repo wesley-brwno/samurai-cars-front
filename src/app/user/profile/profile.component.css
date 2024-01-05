@@ -88,9 +88,10 @@
     }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 450px) {
     .profile_section {
-        min-height: 100vh;
+        height: fit-content;
+        min-height: 83vh;
         padding: 1px;
         padding-bottom: 60px;
     }
@@ -106,5 +107,8 @@
     }
     .form_container {
         width: 90vw;
+    }
+    .form_container form {
+        width: 100%;
     }
 }

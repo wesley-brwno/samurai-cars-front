@@ -14,7 +14,7 @@
 </section>
 
 <button type="button" class="btn btn-outline-secondary btn_return"
-  *ngIf="currentSection !== 'actionsMenu'"
+  *ngIf="currentSection !== 'actionsMenu' && currentSection !== 'vehicleForm'"
   (click)="onReturnActionsSection()"
 >
   <img width="24" height="24"
